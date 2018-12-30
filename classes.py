@@ -23,7 +23,6 @@ class Niveau: #Classe permettant de définir le niveau
 
 	def afficher(self, fenetre):
 		mur = pygame.image.load(image_mur).convert()
-		depart = pygame.image.load(image_depart).convert_alpha()
 		arrivee = pygame.image.load(image_arrivee).convert_alpha()
 
 		num_ligne = 0
@@ -36,28 +35,25 @@ class Niveau: #Classe permettant de définir le niveau
 					fenetre.blit(mur, (x,y))
 				if sprite == "a":
 					fenetre.blit(arrivee, (x,y))
-				if sprite == "d":
-					fenetre.blit(depart, (x,y))
 				num_case += 1
 			num_ligne += 1
 
 
 class Perso:
 
-	def __init__(self, avatar, niveau):
+	def __init__(self, avatar, position):
 		self.avatar = pygame.image.load(image_avatar).convert_alpha()
 		self.x = 0
 		self.y = 0
 		self.case_x = 0
 		self.case_y = 0
-		self.direction = self.avatar
-		self.niveau = niveau
+		self.position = position
 		
 
 	def deplacer(self, direction):
 		if direction == "droite":
 			if self.case_x < (nombre_sprite_cote - 1):
-				if self.niveau.structure[self.case_y][self.case_x + 1] != "m":
+				if self.position.structure[self.case_y][self.case_x + 1] != "m":
 					self.case_x += 1
 					self.x = self.case_x * taille_sprite
 				
@@ -65,21 +61,21 @@ class Perso:
 
 		if direction == "gauche":
 			if self.case_x > 0:
-				if self.niveau.structure[self.case_y][self.case_x - 1] != "m":
+				if self.position.structure[self.case_y][self.case_x - 1] != "m":
 					self.case_x -= 1
 					self.x = self.case_x * taille_sprite
 				
 
 		if direction == "haut":
 			if self.case_y > 0:
-				if self.niveau.structure[self.case_y - 1][self.case_x ] != "m":
+				if self.position.structure[self.case_y - 1][self.case_x ] != "m":
 					self.case_y -= 1
 					self.y = self.case_y * taille_sprite
 				
 
 		if direction == "bas":
 			if self.case_y < (nombre_sprite_cote - 1):
-				if self.niveau.structure[self.case_y + 1][self.case_x] != "m":
+				if self.position.structure[self.case_y + 1][self.case_x] != "m":
 					self.case_y += 1
 					self.y = self.case_y * taille_sprite
 				
