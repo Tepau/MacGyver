@@ -65,11 +65,13 @@ while continuer :
 		fond = pygame.image.load(image_fond).convert()
 		fenetre.blit(fond, (0,0))
 		niveau.afficher(fenetre)
-		fenetre.blit(macgyver.direction, (macgyver.x, macgyver.y))
+		fenetre.blit(macgyver.avatar, (macgyver.x, macgyver.y))
 		pygame.display.flip()
 
 		if niveau.structure[macgyver.case_y][macgyver.case_x] == 'a':
+			continuer = 0
 			continuer_jeu = 0
+			continuer_accueil = 0
 
 
 
