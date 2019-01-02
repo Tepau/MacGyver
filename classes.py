@@ -100,7 +100,7 @@ class Objet_aleatoire:  # the class for the items
         while self.loaded:
             self.case_x = random.randint(0, 14) 
             self.case_y = random.randint(0, 14)  
-            if self.niveau.structure[self.case_y][self.case_x] == "0": e
+            if self.niveau.structure[self.case_y][self.case_x] == "0": 
                 self.y = self.case_y * taille_sprite  
                 self.x = self.case_x * taille_sprite
                 self.loaded = False  
