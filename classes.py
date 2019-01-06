@@ -5,13 +5,13 @@ import random
 
 class Niveau: #Classe permettant de définir le niveau
 	
-	def __init__(self, fichier):
-		self.fichier = fichier
+	def __init__(self, ):
+		
 		self.structure = 0
 
 
 	def generer(self):
-		with open(self.fichier, "r") as fichier:
+		with open("n1", "r") as fichier:
 			structure_niveau = []
 			for ligne in fichier:
 				ligne_niveau = []
@@ -104,6 +104,10 @@ class Objet_aleatoire:  # the class for the items
                 self.y = self.case_y * taille_sprite  
                 self.x = self.case_x * taille_sprite
                 self.loaded = False  
+
+
+
+
 
 
 
