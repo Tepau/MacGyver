@@ -18,6 +18,8 @@ image_avatar = pygame.image.load(image_avatar).convert_alpha()
 image_tube = pygame.image.load(image_tube).convert_alpha()
 image_aiguille = pygame.image.load(image_aiguille).convert_alpha()
 image_ether = pygame.image.load(image_ether).convert_alpha()
+image_seringue = pygame.image.load(image_seringue).convert_alpha()
+image_bandeau = pygame.image.load(image_bandeau).convert()
 
 pygame.key.set_repeat(400, 30)
 pygame.display.flip()
@@ -147,6 +149,16 @@ while continuer :
 
 		if aiguille_non_attrape == False:
 			fenetre.blit(aiguille.image_objet, (80, 0))
+
+		if tube_non_attrape == False and ether_non_attrape == False and aiguille_non_attrape == False:
+
+			fenetre.blit(image_bandeau, (0,0))
+
+			fenetre.blit(image_seringue, (110,0))
+			
+
+
+
 
 
 
