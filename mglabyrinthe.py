@@ -15,13 +15,10 @@ fond = pygame.image.load(image_fond).convert()
 
 pygame.display.set_caption(titre_fenetre)
 
-image_tube = pygame.image.load(image_tube)
-image_aiguille = pygame.image.load(image_aiguille)
+image_tube = pygame.image.load(image_tube).convert_alpha()
+image_aiguille = pygame.image.load(image_aiguille).convert_alpha()
 image_ether = pygame.image.load(image_ether).convert_alpha()
-image_tube.set_colorkey((255,255,255))
-image_tube.convert_alpha()
-image_aiguille.set_colorkey((255,255,255))
-image_aiguille.convert_alpha()
+
 
 pygame.display.flip()
 
