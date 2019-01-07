@@ -14,16 +14,18 @@ accueil = pygame.image.load(image_accueil).convert()
 fond = pygame.image.load(image_fond).convert()
 
 pygame.display.set_caption(titre_fenetre)
-
+image_avatar = pygame.image.load(image_avatar).convert_alpha()
 image_tube = pygame.image.load(image_tube).convert_alpha()
 image_aiguille = pygame.image.load(image_aiguille).convert_alpha()
 image_ether = pygame.image.load(image_ether).convert_alpha()
 
-
+pygame.key.set_repeat(400, 30)
 pygame.display.flip()
 
 
 continuer = 1
+
+
 
   
 
@@ -69,22 +71,26 @@ while continuer :
 
 
 	
-	niveau = Niveau()
-	niveau.generer()
-	niveau.afficher(fenetre)
-	macgyver = Perso(image_avatar, niveau)
-	tube = Objet_aleatoire(image_tube, niveau)
+	labyrinthe = Labyrinthe()
+	labyrinthe.generer()
+	labyrinthe.afficher(fenetre)
+	macgyver = Perso(image_avatar, labyrinthe)
+	tube = Objet_aleatoire(image_tube, labyrinthe)
 	tube.afficher(image_tube, fenetre)
-	aiguille = Objet_aleatoire(image_aiguille, niveau)
+	aiguille = Objet_aleatoire(image_aiguille, labyrinthe)
 	aiguille.afficher(image_aiguille, fenetre)
-	ether = Objet_aleatoire(image_ether, niveau)
+	ether = Objet_aleatoire(image_ether, labyrinthe)
 	ether.afficher(image_ether, fenetre)
+
+	pygame.key.set_repeat(400, 30)
 
 
 
 	
 
 	while continuer_jeu :
+
+		pygame.time.Clock().tick(30)
 		
 		fenetre = pygame.display.set_mode((cote_fenetre, 480))
 		for event in pygame.event.get():
@@ -109,7 +115,7 @@ while continuer :
 		
 		
 		fenetre.blit(fond, (0,30))
-		niveau.afficher(fenetre)
+		labyrinthe.afficher(fenetre)
 		fenetre.blit(macgyver.avatar, (macgyver.x, macgyver.y))
 
 		if tube_non_attrape:
@@ -130,7 +136,7 @@ while continuer :
 			
 
 		if ether_non_attrape == False:
-			fenetre.blit(ether.image_objet, (30, 0))
+			fenetre.blit(ether.image_objet, (40, 0))
 
 
 		if aiguille_non_attrape:
@@ -140,7 +146,7 @@ while continuer :
 			
 
 		if aiguille_non_attrape == False:
-			fenetre.blit(aiguille.image_objet, (60, 0))
+			fenetre.blit(aiguille.image_objet, (80, 0))
 
 
 
@@ -150,7 +156,7 @@ while continuer :
 		
 		pygame.display.flip()
 
-		if niveau.structure[macgyver.case_y][macgyver.case_x] == "a":
+		if labyrinthe.structure[macgyver.case_y][macgyver.case_x] == "a":
 			continuer_jeu = 0
 			continuer_accueil = 0
 			continuer = 0
