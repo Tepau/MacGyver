@@ -31,6 +31,10 @@ BANDEAU = pygame.image.load(BANDEAU_IMAGE).convert()
 pygame.key.set_repeat(100, 30)
 MAIN_LOOP = 1
 
+tube_catch = False
+ether_catch = False
+needle_catch = False
+
 #Main loop of the game
 while MAIN_LOOP:
 
@@ -118,16 +122,19 @@ while MAIN_LOOP:
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == TUBE_LETTER:
             MACGYVER.erase()
             MACGYVER.add_inventory()
+            tube_catch = True
             WINDOW.blit(TUBE, (360, 0))
 
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == NEEDLE_LETTER:
             MACGYVER.erase()
             MACGYVER.add_inventory()
+            needle_catch = True
             WINDOW.blit(NEEDLE, (330, 0))
 
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == ETHER_LETTER:
             MACGYVER.erase()
             MACGYVER.add_inventory()
+            ether_catch = True
             WINDOW.blit(ETHER, (300, 0))
 
         if MACGYVER.inventory == 3:
@@ -157,12 +164,73 @@ while MAIN_LOOP:
 
             #Contrary the game is loose
             else:
-                WINDOW.blit(BACKGROUND, (0, 30))
-                FONT = pygame.font.Font(None, 30)
-                TEXT_DEFEAT = FONT.render("YOU LOOSE", 1, (255, 255, 255))
+                if tube_catch == False\
+                and ether_catch == True\
+                and needle_catch == True :
+                    WINDOW.blit(BACKGROUND, (0, 30))
+                    FONT = pygame.font.Font(None, 30)
+                    TEXT_DEFEAT = FONT.render\
+                                  ("Perdu tu n'as pas trouvé le tube",\
+                                  1, (255, 255, 255))
+                    
+                elif ether_catch == False\
+                and tube_catch == True\
+                and needle_catch == True:
+                    WINDOW.blit(BACKGROUND, (0, 30))
+                    FONT = pygame.font.Font(None, 30)
+                    TEXT_DEFEAT = FONT.render\
+                                  ("Perdu tu n'as pas trouvé l'ether",\
+                                  1, (255, 255, 255))
+                    
+                elif needle_catch == False\
+                and ether_catch == True\
+                and tube_catch == True:
+                    WINDOW.blit(BACKGROUND, (0, 30))
+                    FONT = pygame.font.Font(None, 30)
+                    TEXT_DEFEAT = FONT.render\
+                                  ("Perdu tu n'as pas trouvé l'aiguille",\
+                                  1, (255, 255, 255))
+                
+                elif tube_catch == False\
+                and ether_catch == False\
+                and needle_catch == True:
+                    WINDOW.blit(BACKGROUND, (0, 30))
+                    FONT = pygame.font.Font(None, 30)
+                    TEXT_DEFEAT = FONT.render\
+                                  ("Perdu tu n'as pas trouvé le tube et l'ether",\
+                                  1, (255, 255, 255))
+                    
+                elif tube_catch == False\
+                and needle_catch == False\
+                and ether_catch == True:
+                    WINDOW.blit(BACKGROUND, (0, 30))
+                    FONT = pygame.font.Font(None, 30)
+                    TEXT_DEFEAT = FONT.render\
+                                  ("Perdu tu n'as pas trouvé le tube et l'aiguille",\
+                                  1, (255, 255, 255))
+                    
+                elif ether_catch == False\
+                and needle_catch == False\
+                and tube_catch == True:
+                    WINDOW.blit(BACKGROUND, (0, 30))
+                    FONT = pygame.font.Font(None, 30)
+                    TEXT_DEFEAT = FONT.render\
+                                  ("Perdu tu n'as pas trouvé l'ether et l'aiguille",\
+                                  1, (255, 255, 255))
+                    
+                elif ether_catch == False\
+                and needle_catch == False\
+                and tube_catch == False:
+                    WINDOW.blit(BACKGROUND, (0, 30))
+                    FONT = pygame.font.Font(None, 30)
+                    TEXT_DEFEAT = FONT.render\
+                                  ("Perdu tu n'as trouvé aucun objet",\
+                                  1, (255, 255, 255))
+                
                 TEXT_RECT = TEXT_DEFEAT.get_rect()
                 TEXT_RECT.centerx = SCREEN_WIDTH / 2
                 TEXT_RECT.centery = SCREEN_HEIGHT / 2
-                WINDOW.blit(TEXT_DEFEAT, TEXT_RECT)
+                WINDOW.blit(TEXT_DEFEAT, TEXT_RECT) 
+                
 
         pygame.display.flip()
