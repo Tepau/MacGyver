@@ -31,6 +31,7 @@ BANDEAU = pygame.image.load(BANDEAU_IMAGE).convert()
 pygame.key.set_repeat(100, 30)
 MAIN_LOOP = 1
 
+#Booleens used to define which object is caught or not
 tube_catch = False
 ether_catch = False
 needle_catch = False
@@ -164,69 +165,70 @@ while MAIN_LOOP:
 
             #Contrary the game is loose
             else:
+                #If user didn't find the tube
                 if tube_catch == False\
                 and ether_catch == True\
                 and needle_catch == True :
-                    WINDOW.blit(BACKGROUND, (0, 30))
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
                                   ("Perdu tu n'as pas trouvé le tube",\
                                   1, (255, 255, 255))
-                    
+
+                #If user didn't find the ether
                 elif ether_catch == False\
                 and tube_catch == True\
                 and needle_catch == True:
-                    WINDOW.blit(BACKGROUND, (0, 30))
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
                                   ("Perdu tu n'as pas trouvé l'ether",\
                                   1, (255, 255, 255))
-                    
+
+                #If user didn't find the needle
                 elif needle_catch == False\
                 and ether_catch == True\
                 and tube_catch == True:
-                    WINDOW.blit(BACKGROUND, (0, 30))
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
                                   ("Perdu tu n'as pas trouvé l'aiguille",\
                                   1, (255, 255, 255))
-                
+
+                #If user didn't find the tube and the ether
                 elif tube_catch == False\
                 and ether_catch == False\
                 and needle_catch == True:
-                    WINDOW.blit(BACKGROUND, (0, 30))
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
                                   ("Perdu tu n'as pas trouvé le tube et l'ether",\
                                   1, (255, 255, 255))
-                    
+
+                #If user didn't find the tube and the needle
                 elif tube_catch == False\
                 and needle_catch == False\
                 and ether_catch == True:
-                    WINDOW.blit(BACKGROUND, (0, 30))
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
                                   ("Perdu tu n'as pas trouvé le tube et l'aiguille",\
                                   1, (255, 255, 255))
-                    
+
+                #If user didn't find the ether and the needle
                 elif ether_catch == False\
                 and needle_catch == False\
                 and tube_catch == True:
-                    WINDOW.blit(BACKGROUND, (0, 30))
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
                                   ("Perdu tu n'as pas trouvé l'ether et l'aiguille",\
                                   1, (255, 255, 255))
-                    
+
+                #If user didn't find anything
                 elif ether_catch == False\
                 and needle_catch == False\
                 and tube_catch == False:
-                    WINDOW.blit(BACKGROUND, (0, 30))
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
                                   ("Perdu tu n'as trouvé aucun objet",\
                                   1, (255, 255, 255))
                 
+                WINDOW.blit(BACKGROUND, (0, 30))
                 TEXT_RECT = TEXT_DEFEAT.get_rect()
                 TEXT_RECT.centerx = SCREEN_WIDTH / 2
                 TEXT_RECT.centery = SCREEN_HEIGHT / 2
