@@ -1,129 +1,141 @@
-import pygame
-from pygame.locals import *
-from constantes import *
+'''Classes mmodule'''
 import random
+import pygame
 
-class Labyrinthe: 
+from constantes import (NB_SPRITE_SIDE, SPRITE_SIZE,
+                        BANNER_SIZE, ARRIVAL_IMAGE,
+                        WALL_IMAGE, ETHER_IMAGE,
+                        NEEDLE_IMAGE, TUBE_IMAGE,
+                        NEEDLE_LETTER, TUBE_LETTER,
+                        ETHER_LETTER)
 
-#Classe permettant de définir le lab
-#Cette classe possède deux méthodes. Une qui ouvre le fichier, le lit et enregistre son contenu dans une liste, 
-#copiée dans l'attribut structure. 
-#L'autre lit cette liste et affiche son contenu à l'écran, elle doit donc être appelée à chaque fois qu'on rafraîchit l'écran !
-	
-	def __init__(self):
-		
-		self.structure = 0
+class Maze:
+    '''Define the maze strcture. Two methods
 
+    to create and display.
 
-	def generer(self):
-		with open("n1", "r") as fichier:     #Ouverture du fichier contenant la structure du labyrinthe
-			structure_niveau = []				
-			for ligne in fichier:			#On parcourt les lignes du fichier
-				ligne_niveau = []
-				for sprite in ligne:		#On parcourt les lettre contenues dans les lignes du fichier
-					if sprite != "\n":		#On ignore les \n contenus dans le fichier	
-						ligne_niveau.append(sprite)		#On ajoute les lettres à la liste de la ligne
-				structure_niveau.append(ligne_niveau)   # On ajoute les liste de la ligne a la structure du labyrinthe
-			self.structure = structure_niveau			# On sauvegarde la structure
+    '''
+    def __init__(self):
 
+        self.inventory = 0
+        self.structure_map = self.generate()
 
-	def afficher(self, fenetre):
-		mur = pygame.image.load(image_mur).convert()		#Chargement de images symbolisant les murs et la fin du labyrinthe
-		arrivee = pygame.image.load(image_arrivee).convert_alpha()
-		
+    def generate(self):
+        '''create the maze structure from a external file. And
 
-		num_ligne = 0
-		for ligne in self.structure:				#On parcourt les listes du niveau
-			num_case = 0
-			for sprite in ligne:					#On parcourt  les listes des lignes
-				x = num_case * taille_sprite		#Calcul de la position réelle en pixels
-				y = num_ligne * taille_sprite
-				if sprite == "m":                   #m = mur
-					fenetre.blit(mur, (x,y))
-				if sprite == "a":
-					fenetre.blit(arrivee, (x,y))    #a = arrivée = garde
-				
-				num_case += 1
-			num_ligne += 1
+        places 3 objects randomly in the maze.
+        '''
+        with open("n1", "r") as file:
+            structure_maze = []
+            for ligne in file:
+                ligne_maze = []
+                for letter in ligne:
+                    if letter != "\n":
+                        ligne_maze.append(letter)
+                structure_maze.append(ligne_maze)
 
+        while self.inventory < 3:
 
-class Perso:
-#Classe Perso. Elle prend en paramètre l'image du personnage et la liste de structure du labyrinthe.
-#Cette classe possède une seule méthode, qui s'occupe du déplacement de MG, qu'on appelle à chaque déplacement, 
-#avec en paramètre la direction de celui-ci. ('droite', 'gauche', 'haut', 'bas')
-#Elle vérifie qu'on ne sort pas de l'écran.
-#On enlève 1 à la constante nombre_sprite_cote car la case de MG est elle comptée à partir de 0  
-#Elle vérifie que la case de destination est libre en lisant la liste de structure.
-#Elle déplace MG d'une case et change sa position réelle en pixel. L'attribut de direction prend la valeur de la direction du déplacement.'''
+            x_item = random.randint(0, 14)
+            y_item = random.randint(0, 14)
+            if structure_maze[y_item][x_item] == "0":
+                if self.inventory == 0:
+                    structure_maze[y_item][x_item] = NEEDLE_LETTER
+                elif self.inventory == 1:
+                    structure_maze[y_item][x_item] = TUBE_LETTER
+                elif self.inventory == 2:
+                    structure_maze[y_item][x_item] = ETHER_LETTER
 
-	def __init__(self, avatar, labyrinthe):
-		self.avatar = avatar
-		self.x = 0
-		self.y = 30					#position du personnages en pixel et en case
-		self.case_x = 0
-		self.case_y = 1
-		self.labyrinthe = labyrinthe #labyrinthe dans lequel se trouve le perso
-		
+                self.inventory += 1
+                self.structure_map = structure_maze
 
-	def deplacer(self, direction):
-		if direction == "droite":
-			if self.case_x < (nombre_sprite_cote - 1):  #Pour ne pas dépasser l'écran
-				if self.labyrinthe.structure[self.case_y][self.case_x + 1] != "m": #on Vérifie que la case de destination n'est pas un mur 
-					self.case_x += 1  #déplacement d'une case
-					self.x = self.case_x * taille_sprite # Calcul de la nouvelle position en pixel
-				
-
-
-		if direction == "gauche":
-			if self.case_x > 0:
-				if self.labyrinthe.structure[self.case_y][self.case_x - 1] != "m":
-					self.case_x -= 1
-					self.x = self.case_x * taille_sprite
-				
-
-		if direction == "haut":
-			if self.case_y > 0:
-				if self.labyrinthe.structure[self.case_y - 1][self.case_x ] != "m":
-					if self.labyrinthe.structure[self.case_y - 1][self.case_x] != "x":
-						self.case_y -= 1
-						self.y = self.case_y * taille_sprite
-				
-
-		if direction == "bas":
-			if self.case_y < (nombre_sprite_cote):
-				if self.labyrinthe.structure[self.case_y + 1][self.case_x] != "m":
-					self.case_y += 1
-					self.y = self.case_y * taille_sprite
-				
+        return structure_maze
 
 
 
-class Objet_aleatoire: 
+    def display(self, window):
+        '''Display the maze structure
+
+        by displaying walls and the arrival of the maze'''
+        tube = pygame.image.load(TUBE_IMAGE).convert_alpha()
+        needle = pygame.image.load(NEEDLE_IMAGE).convert_alpha()
+        ether = pygame.image.load(ETHER_IMAGE).convert_alpha()
+        wall = pygame.image.load(WALL_IMAGE).convert()
+        arrival = pygame.image.load(ARRIVAL_IMAGE).convert_alpha()
+        num_ligne = 0
+        for ligne in self.structure_map:
+            num_case = 0
+            for sprite in ligne:
+                x_sprite = num_case * SPRITE_SIZE
+                y_sprite = num_ligne * SPRITE_SIZE + BANNER_SIZE
+                if sprite == "m":
+                    window.blit(wall, (x_sprite, y_sprite))
+                elif sprite == "a":
+                    window.blit(arrival, (x_sprite, y_sprite))
+                elif sprite == NEEDLE_LETTER:
+                    window.blit(needle, (x_sprite, y_sprite))
+                elif sprite == TUBE_LETTER:
+                    window.blit(tube, (x_sprite, y_sprite))
+                elif sprite == ETHER_LETTER:
+                    window.blit(ether, (x_sprite, y_sprite))
+
+                num_case += 1
+            num_ligne += 1
 
 
-#Classe qui prend en paramètre l'image de l'objet et la liste de structure du labyrinthe
-#Elle possède 1 méthode  qui permet de placer l'objet de façon aléatoire dans le labyrinthe
-    def __init__(self, image_objet, labyrinthe):
-        self.case_y = 0
+class Character:
+    '''Define movement of the character
+
+    and the inventory of obects picked up
+
+    '''
+
+    def __init__(self, avatar, maze):
+        self.avatar = avatar
+        self.x_item = 0
+        self.y_item = 30
         self.case_x = 0
-        self.x = 0
-        self.y = 0
-        self.labyrinthe = labyrinthe
-        self.loaded = True
-        self.image_objet = image_objet
+        self.case_y = 0
+        self.maze = maze
+        self.inventory = 0
 
-    def afficher(self, image_objet, fenetre):
-        while self.loaded:
-            self.case_x = random.randint(0, 14) 
-            self.case_y = random.randint(0, 14)  
-            if self.labyrinthe.structure[self.case_y][self.case_x] == "0": 
-                self.y = self.case_y * taille_sprite  
-                self.x = self.case_x * taille_sprite
-                self.loaded = False  
+    def move(self, direction):
+        '''verified that character can move on the desired case'''
 
+        if direction == "right":
+            if self.case_x < (NB_SPRITE_SIDE - 1):
+                if self.maze.structure_map[self.case_y][self.case_x + 1] != "m":
+                    self.case_x += 1
+                    self.x_item = self.case_x * SPRITE_SIZE
 
+        elif direction == "left":
+            if self.case_x > 0:
+                if self.maze.structure_map[self.case_y][self.case_x - 1] != "m":
+                    self.case_x -= 1
+                    self.x_item = self.case_x * SPRITE_SIZE
 
+        elif direction == "up":
+            if self.case_y > 0\
+            and self.maze.structure_map[self.case_y - 1][self.case_x] != "m":
+                self.case_y -= 1
+                self.y_item = self.case_y * SPRITE_SIZE + BANNER_SIZE
 
+        elif direction == "down":
+            if self.case_y < (NB_SPRITE_SIDE - 1):
+                if self.maze.structure_map[self.case_y + 1][self.case_x] != "m":
+                    self.case_y += 1
+                    self.y_item = self.case_y * SPRITE_SIZE + BANNER_SIZE
 
+    def erase(self):
+        '''Erase image of the maze when MG passes over it'''
 
+        self.maze.structure_map[self.case_y][self.case_x] = "0"
 
+    def add_inventory(self):
+        '''Add the object found in the inventory'''
+        self.inventory += 1
+
+    def display_inventory(self):
+        '''Display the number of object to find'''
+        text = "Objets restant à trouver: {}".format(3 - self.inventory)
+        return text
