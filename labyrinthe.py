@@ -154,7 +154,7 @@ while MAIN_LOOP:
                 WINDOW.blit(BACKGROUND, (0, 30))
                 FONT = pygame.font.Font(None, 30)
                 TEXT_VICTORY = FONT.render\
-                               ("Bravo! Tu as gagné!!!", 1, (255, 255, 255))
+                               (" Well done! You win!!!", 1, (255, 255, 255))
                 TEXT_RECT = TEXT_VICTORY.get_rect()
                 TEXT_RECT.centerx = SCREEN_WIDTH / 2
                 TEXT_RECT.centery = SCREEN_HEIGHT / 2
@@ -171,7 +171,7 @@ while MAIN_LOOP:
                 and needle_catch == True :
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
-                                  ("Perdu tu n'as pas trouvé le tube",\
+                                  ("Game over! You didn't find the tube!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find the ether
@@ -180,7 +180,7 @@ while MAIN_LOOP:
                 and needle_catch == True:
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
-                                  ("Perdu tu n'as pas trouvé l'ether",\
+                                  ("Game Over! You didn't find the bottle of ether!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find the needle
@@ -189,7 +189,7 @@ while MAIN_LOOP:
                 and tube_catch == True:
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
-                                  ("Perdu tu n'as pas trouvé l'aiguille",\
+                                  ("Game Over! You didn't find the needle!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find the tube and the ether
@@ -198,7 +198,7 @@ while MAIN_LOOP:
                 and needle_catch == True:
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
-                                  ("Perdu tu n'as pas trouvé le tube et l'ether",\
+                                  ("Game Over! You didn't find the tube and the ether!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find the tube and the needle
@@ -207,7 +207,7 @@ while MAIN_LOOP:
                 and ether_catch == True:
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
-                                  ("Perdu tu n'as pas trouvé le tube et l'aiguille",\
+                                  ("Game Over! You didn't find the tube and the needle!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find the ether and the needle
@@ -216,7 +216,7 @@ while MAIN_LOOP:
                 and tube_catch == True:
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
-                                  ("Perdu tu n'as pas trouvé l'ether et l'aiguille",\
+                                  ("Game Over! You didn't find the ether and the needle!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find anything
@@ -225,7 +225,7 @@ while MAIN_LOOP:
                 and tube_catch == False:
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
-                                  ("Perdu tu n'as trouvé aucun objet",\
+                                  ("Game Over! You have not found anything!",\
                                   1, (255, 255, 255))
                 
                 WINDOW.blit(BACKGROUND, (0, 30))
