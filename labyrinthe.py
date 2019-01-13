@@ -1,5 +1,5 @@
 # -*- coding: Utf-8 -*
-
+'''Main Loops oh the game'''
 import pygame
 from pygame.locals import *
 
@@ -32,9 +32,9 @@ pygame.key.set_repeat(100, 30)
 MAIN_LOOP = 1
 
 #Booleens used to define which object is caught or not
-tube_catch = False
-ether_catch = False
-needle_catch = False
+TUBE_CATCH = False
+ETHER_CATCH = False
+NEEDLE_CATCH = False
 
 #Main loop of the game
 while MAIN_LOOP:
@@ -123,19 +123,19 @@ while MAIN_LOOP:
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == TUBE_LETTER:
             MACGYVER.erase()
             MACGYVER.add_inventory()
-            tube_catch = True
+            TUBE_CATCH = True
             WINDOW.blit(TUBE, (360, 0))
 
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == NEEDLE_LETTER:
             MACGYVER.erase()
             MACGYVER.add_inventory()
-            needle_catch = True
+            NEEDLE_CATCH = True
             WINDOW.blit(NEEDLE, (330, 0))
 
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == ETHER_LETTER:
             MACGYVER.erase()
             MACGYVER.add_inventory()
-            ether_catch = True
+            ETHER_CATCH = True
             WINDOW.blit(ETHER, (300, 0))
 
         if MACGYVER.inventory == 3:
@@ -166,73 +166,71 @@ while MAIN_LOOP:
             #Contrary the game is loose
             else:
                 #If user didn't find the tube
-                if tube_catch == False\
-                and ether_catch == True\
-                and needle_catch == True :
+                if TUBE_CATCH is False\
+                and ETHER_CATCH is True\
+                and NEEDLE_CATCH is True:
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
                                   ("Game over! You didn't find the tube!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find the ether
-                elif ether_catch == False\
-                and tube_catch == True\
-                and needle_catch == True:
-                    FONT = pygame.font.Font(None, 30)
+                elif ETHER_CATCH is False\
+                and TUBE_CATCH is True\
+                and NEEDLE_CATCH is True:
+                    FONT = pygame.font.Font(None, 25)
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You didn't find the bottle of ether!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find the needle
-                elif needle_catch == False\
-                and ether_catch == True\
-                and tube_catch == True:
+                elif NEEDLE_CATCH is False\
+                and ETHER_CATCH is True\
+                and TUBE_CATCH is True:
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You didn't find the needle!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find the tube and the ether
-                elif tube_catch == False\
-                and ether_catch == False\
-                and needle_catch == True:
-                    FONT = pygame.font.Font(None, 30)
+                elif TUBE_CATCH is False\
+                and ETHER_CATCH is False\
+                and NEEDLE_CATCH is True:
+                    FONT = pygame.font.Font(None, 25)
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You didn't find the tube and the ether!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find the tube and the needle
-                elif tube_catch == False\
-                and needle_catch == False\
-                and ether_catch == True:
-                    FONT = pygame.font.Font(None, 30)
+                elif TUBE_CATCH is False\
+                and NEEDLE_CATCH is False\
+                and ETHER_CATCH is True:
+                    FONT = pygame.font.Font(None, 25)
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You didn't find the tube and the needle!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find the ether and the needle
-                elif ether_catch == False\
-                and needle_catch == False\
-                and tube_catch == True:
-                    FONT = pygame.font.Font(None, 30)
+                elif ETHER_CATCH is False\
+                and NEEDLE_CATCH is False\
+                and TUBE_CATCH is True:
+                    FONT = pygame.font.Font(None, 25)
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You didn't find the ether and the needle!",\
                                   1, (255, 255, 255))
 
                 #If user didn't find anything
-                elif ether_catch == False\
-                and needle_catch == False\
-                and tube_catch == False:
+                elif ETHER_CATCH is False\
+                and NEEDLE_CATCH is False\
+                and TUBE_CATCH is False:
                     FONT = pygame.font.Font(None, 30)
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You have not found anything!",\
                                   1, (255, 255, 255))
-                
+
                 WINDOW.blit(BACKGROUND, (0, 30))
                 TEXT_RECT = TEXT_DEFEAT.get_rect()
                 TEXT_RECT.centerx = SCREEN_WIDTH / 2
                 TEXT_RECT.centery = SCREEN_HEIGHT / 2
-                WINDOW.blit(TEXT_DEFEAT, TEXT_RECT) 
-                
-
+                WINDOW.blit(TEXT_DEFEAT, TEXT_RECT)
         pygame.display.flip()
