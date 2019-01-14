@@ -1,4 +1,4 @@
-'''Classes mmodule'''
+'''Classes module'''
 import random
 import pygame
 

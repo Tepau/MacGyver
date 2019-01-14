@@ -20,7 +20,7 @@ TUBE_IMAGE = "Ressources/tube_plastique.png"
 SYRINGE_IMAGE = "Ressources/seringue.png"
 BANDEAU_IMAGE = "Ressources/CarreNoir.png"
 
-#3 objects to fin
+#3 objects to find
 NEEDLE_LETTER = "N"
 TUBE_LETTER = "T"
 ETHER_LETTER = "E"

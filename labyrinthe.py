@@ -1,5 +1,11 @@
 # -*- coding: Utf-8 -*
-'''Main Loops oh the game'''
+'''Maze game
+The goal is to get Mac Gyver out of the maze
+To win he must pick up 3 items that will allow him to create a syringe
+to lull the guard that protects the exit.
+
+files : constantes.py , classes.py , n1 , /Ressources'''
+
 import pygame
 from pygame.locals import *
 
@@ -41,16 +47,11 @@ while MAIN_LOOP:
 
     #Display home screen
     WINDOW.blit(HOME, (0, 30))
-    WINDOW.blit(BANDEAU, (0, 0))
-
     #Print text on home screen
     FONT = pygame.font.Font(None, 30)
     TEXT_HOME = FONT.render\
                 ("Press ENTER to continue or ECHAP to quit", 1, (0, 0, 0))
-    TEXT_RECT = TEXT_HOME.get_rect()
-    TEXT_RECT.centerx = SCREEN_WIDTH / 2
-    TEXT_RECT.centery = SCREEN_HEIGHT / 9
-    WINDOW.blit(TEXT_HOME, TEXT_RECT)
+    WINDOW.blit(TEXT_HOME, (20, 40))
 
     #Refresh the screen
     pygame.display.flip()
@@ -86,27 +87,27 @@ while MAIN_LOOP:
 
     #Game loop
     while CONTINUE_GAME:
+
+        pygame.time.Clock().tick(30)
         #Loading background and a text zone for inventory
         FONT = pygame.font.Font(None, 25)
-        INVENTORY = FONT.render(MACGYVER.display_inventory(), 1, (255, 255, 255)) # Display the text
+        INVENTORY = FONT.render\
+        (MACGYVER.display_inventory(), 1, (255, 255, 255)) # Display the text
         INVENTORY.fill((0, 0, 0))
         WINDOW.blit(INVENTORY, (0, 5))
-        INVENTORY = FONT.render(MACGYVER.display_inventory(), 1, (255, 255, 255))
+        INVENTORY = FONT.render\
+        (MACGYVER.display_inventory(), 1, (255, 255, 255))
         WINDOW.blit(INVENTORY, (0, 5))
 
         WINDOW.blit(BACKGROUND, (0, 30))
         MAZE.display(WINDOW)
         WINDOW.blit(MACGYVER.avatar, (MACGYVER.x_item, MACGYVER.y_item))
 
-
-
-
-        #If user quit the program stops
+        #If user quit we come-back at home
         for event in pygame.event.get():
             if event.type == QUIT\
             or event.type == KEYDOWN and event.key == K_ESCAPE:
                 CONTINUE_GAME = 0
-
 
             #Directional keys are used to move Mac Gyver
             if event.type == KEYDOWN:
@@ -118,7 +119,6 @@ while MAIN_LOOP:
                     MACGYVER.move("down")
                 elif event.key == K_UP:
                     MACGYVER.move("up")
-
 
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == TUBE_LETTER:
             MACGYVER.erase()
@@ -142,7 +142,6 @@ while MAIN_LOOP:
             WINDOW.blit(BANDEAU, (300, 0))
             WINDOW.blit(SYRINGE, (310, 0))
 
-
         #If the users move to the guard position, the game is over
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == "a":
             CONTINUE_GAME = 0
@@ -154,14 +153,9 @@ while MAIN_LOOP:
                 WINDOW.blit(BACKGROUND, (0, 30))
                 FONT = pygame.font.Font(None, 30)
                 TEXT_VICTORY = FONT.render\
-                               (" Well done! You win!!!", 1, (255, 255, 255))
-                TEXT_RECT = TEXT_VICTORY.get_rect()
-                TEXT_RECT.centerx = SCREEN_WIDTH / 2
-                TEXT_RECT.centery = SCREEN_HEIGHT / 2
-                WINDOW.blit(TEXT_VICTORY, TEXT_RECT)
-
-
-
+                               (" Well done! Mac Gyver is safe!!",\
+                               1, (255, 255, 255))
+                WINDOW.blit(TEXT_VICTORY, (65, 225))
 
             #Contrary the game is loose
             else:
@@ -229,8 +223,5 @@ while MAIN_LOOP:
                                   1, (255, 255, 255))
 
                 WINDOW.blit(BACKGROUND, (0, 30))
-                TEXT_RECT = TEXT_DEFEAT.get_rect()
-                TEXT_RECT.centerx = SCREEN_WIDTH / 2
-                TEXT_RECT.centery = SCREEN_HEIGHT / 2
-                WINDOW.blit(TEXT_DEFEAT, TEXT_RECT)
+                WINDOW.blit(TEXT_DEFEAT, (10, 225))
         pygame.display.flip()
