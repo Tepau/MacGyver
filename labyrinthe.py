@@ -7,7 +7,10 @@ to lull the guard that protects the exit.
 files : constantes.py , classes.py , n1 , /Ressources'''
 
 import pygame
-from pygame.locals import *
+from pygame.locals import (QUIT, K_DOWN,
+                           K_ESCAPE, K_RIGHT,
+                           K_LEFT, K_UP,
+                           K_RETURN, KEYDOWN)
 
 from classes import *
 from constantes import *
@@ -84,7 +87,6 @@ while MAIN_LOOP:
     MAZE.display(WINDOW)
     MACGYVER = Character(AVATAR, MAZE)
 
-
     #Game loop
     while CONTINUE_GAME:
 
@@ -99,15 +101,14 @@ while MAIN_LOOP:
         (MACGYVER.display_inventory(), 1, (255, 255, 255))
         WINDOW.blit(INVENTORY, (0, 5))
 
-        WINDOW.blit(BACKGROUND, (0, 30))
-        MAZE.display(WINDOW)
-        WINDOW.blit(MACGYVER.avatar, (MACGYVER.x_item, MACGYVER.y_item))
 
         #If user quit we come-back at home
         for event in pygame.event.get():
             if event.type == QUIT\
             or event.type == KEYDOWN and event.key == K_ESCAPE:
                 CONTINUE_GAME = 0
+                CONTINUE_HOME = 0
+                MAIN_LOOP = 0
 
             #Directional keys are used to move Mac Gyver
             if event.type == KEYDOWN:
@@ -119,6 +120,10 @@ while MAIN_LOOP:
                     MACGYVER.move("down")
                 elif event.key == K_UP:
                     MACGYVER.move("up")
+
+        WINDOW.blit(BACKGROUND, (0, 30))
+        MAZE.display(WINDOW)
+        WINDOW.blit(MACGYVER.avatar, (MACGYVER.x_item, MACGYVER.y_item))
 
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == TUBE_LETTER:
             MACGYVER.erase()
@@ -144,20 +149,25 @@ while MAIN_LOOP:
 
         #If the users move to the guard position, the game is over
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == "a":
-            CONTINUE_GAME = 0
-            CONTINUE_HOME = 0
-            MAIN_LOOP = 0
 
             #If user has found all the objects we print the victory screen
             if MACGYVER.inventory == 3:
+
                 WINDOW.blit(BACKGROUND, (0, 30))
                 FONT = pygame.font.Font(None, 30)
                 TEXT_VICTORY = FONT.render\
                                (" Well done! Mac Gyver is safe!!",\
                                1, (255, 255, 255))
+                TEXT_EXIT = FONT.render(TEXT_END, 1, (0, 0, 0))
                 WINDOW.blit(TEXT_VICTORY, (65, 225))
+                WINDOW.blit(TEXT_EXIT, (65, 430))
+                for event in pygame.event.get():
+                    if event.type == QUIT\
+                    or event.type == KEYDOWN and event.key == K_ESCAPE:
+                        CONTINUE_GAME = 0
+                        CONTINUE_HOME = 0
+                        MAIN_LOOP = 0
 
-            #Contrary the game is loose
             else:
                 #If user didn't find the tube
                 if TUBE_CATCH is False\
@@ -167,6 +177,9 @@ while MAIN_LOOP:
                     TEXT_DEFEAT = FONT.render\
                                   ("Game over! You didn't find the tube!",\
                                   1, (255, 255, 255))
+                    TEXT_EXIT = FONT.render\
+                                (TEXT_END,\
+                                1, (0, 0, 0))
 
                 #If user didn't find the ether
                 elif ETHER_CATCH is False\
@@ -176,6 +189,9 @@ while MAIN_LOOP:
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You didn't find the bottle of ether!",\
                                   1, (255, 255, 255))
+                    TEXT_EXIT = FONT.render\
+                                (TEXT_END,\
+                                1, (0, 0, 0))
 
                 #If user didn't find the needle
                 elif NEEDLE_CATCH is False\
@@ -185,6 +201,9 @@ while MAIN_LOOP:
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You didn't find the needle!",\
                                   1, (255, 255, 255))
+                    TEXT_EXIT = FONT.render\
+                                (TEXT_END,\
+                                1, (0, 0, 0))
 
                 #If user didn't find the tube and the ether
                 elif TUBE_CATCH is False\
@@ -194,6 +213,9 @@ while MAIN_LOOP:
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You didn't find the tube and the ether!",\
                                   1, (255, 255, 255))
+                    TEXT_EXIT = FONT.render\
+                                (TEXT_END,\
+                                1, (0, 0, 0))
 
                 #If user didn't find the tube and the needle
                 elif TUBE_CATCH is False\
@@ -203,6 +225,9 @@ while MAIN_LOOP:
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You didn't find the tube and the needle!",\
                                   1, (255, 255, 255))
+                    TEXT_EXIT = FONT.render\
+                                (TEXT_END,\
+                                1, (0, 0, 0))
 
                 #If user didn't find the ether and the needle
                 elif ETHER_CATCH is False\
@@ -212,6 +237,9 @@ while MAIN_LOOP:
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You didn't find the ether and the needle!",\
                                   1, (255, 255, 255))
+                    TEXT_EXIT = FONT.render\
+                                (TEXT_END,\
+                                1, (0, 0, 0))
 
                 #If user didn't find anything
                 elif ETHER_CATCH is False\
@@ -221,7 +249,18 @@ while MAIN_LOOP:
                     TEXT_DEFEAT = FONT.render\
                                   ("Game Over! You have not found anything!",\
                                   1, (255, 255, 255))
+                    TEXT_EXIT = FONT.render\
+                                (TEXT_END,\
+                                1, (0, 0, 0))
 
                 WINDOW.blit(BACKGROUND, (0, 30))
                 WINDOW.blit(TEXT_DEFEAT, (10, 225))
+                WINDOW.blit(TEXT_EXIT, (65, 430))
+                for event in pygame.event.get():
+                    if event.type == QUIT\
+                    or event.type == KEYDOWN and event.key == K_ESCAPE:
+                        CONTINUE_GAME = 0
+                        CONTINUE_HOME = 0
+                        MAIN_LOOP = 0
+
         pygame.display.flip()
