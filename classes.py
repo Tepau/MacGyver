@@ -47,10 +47,8 @@ class Maze:
                     structure_maze[y_item][x_item] = ETHER_LETTER
 
                 self.inventory += 1
-                self.structure_map = structure_maze
 
         return structure_maze
-
 
 
     def display(self, window):
@@ -62,6 +60,7 @@ class Maze:
         ether = pygame.image.load(ETHER_IMAGE).convert_alpha()
         wall = pygame.image.load(WALL_IMAGE).convert()
         arrival = pygame.image.load(ARRIVAL_IMAGE).convert_alpha()
+        
         num_ligne = 0
         for ligne in self.structure_map:
             num_case = 0
@@ -115,10 +114,10 @@ class Character:
                     self.x_item = self.case_x * SPRITE_SIZE
 
         elif direction == "up":
-            if self.case_y > 0\
-            and self.maze.structure_map[self.case_y - 1][self.case_x] != "m":
-                self.case_y -= 1
-                self.y_item = self.case_y * SPRITE_SIZE + BANNER_SIZE
+            if self.case_y > 0:
+                if self.maze.structure_map[self.case_y - 1][self.case_x] != "m":
+                    self.case_y -= 1
+                    self.y_item = self.case_y * SPRITE_SIZE + BANNER_SIZE
 
         elif direction == "down":
             if self.case_y < (NB_SPRITE_SIDE - 1):
@@ -128,7 +127,6 @@ class Character:
 
     def erase(self):
         '''Erase image of the maze when MG passes over it'''
-
         self.maze.structure_map[self.case_y][self.case_x] = "0"
 
     def add_inventory(self):
@@ -137,5 +135,5 @@ class Character:
 
     def display_inventory(self):
         '''Display the number of object to find'''
-        text = "Objets restant à trouver: {}".format(3 - self.inventory)
+        text = "Remaining items to find: {}".format(3 - self.inventory)
         return text
