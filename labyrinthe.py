@@ -251,7 +251,7 @@ while MAIN_LOOP:
                 WINDOW.blit(BACKGROUND, (0, 30))
                 WINDOW.blit(TEXT_DEFEAT, (10, 225))
                 WINDOW.blit(TEXT_EXIT, (65, 430))
-                
+
             for event in pygame.event.get():
                 if event.type == QUIT\
                 or event.type == KEYDOWN and event.key == K_ESCAPE:
