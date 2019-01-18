@@ -25,4 +25,5 @@ NEEDLE_LETTER = "N"
 TUBE_LETTER = "T"
 ETHER_LETTER = "E"
 
+#Text for the end of the game
 TEXT_END = "PRESS ESCAPE TO QUIT THE GAME"

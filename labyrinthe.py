@@ -24,7 +24,7 @@ WINDOW = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 ICON = pygame.image.load(ICON_IMAGE)
 pygame.display.set_icon(ICON)
 
-#Window titile
+#Window title
 pygame.display.set_caption(WINDOW_TITLE)
 
 #Load game images
@@ -101,6 +101,10 @@ while MAIN_LOOP:
         (MACGYVER.display_inventory(), 1, (255, 255, 255))
         WINDOW.blit(INVENTORY, (0, 5))
 
+        WINDOW.blit(BACKGROUND, (0, 30))
+        MAZE.display(WINDOW)
+        WINDOW.blit(MACGYVER.avatar, (MACGYVER.x_item, MACGYVER.y_item))
+
 
         #If user quit we come-back at home
         for event in pygame.event.get():
@@ -120,10 +124,6 @@ while MAIN_LOOP:
                     MACGYVER.move("down")
                 elif event.key == K_UP:
                     MACGYVER.move("up")
-
-        WINDOW.blit(BACKGROUND, (0, 30))
-        MAZE.display(WINDOW)
-        WINDOW.blit(MACGYVER.avatar, (MACGYVER.x_item, MACGYVER.y_item))
 
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == TUBE_LETTER:
             MACGYVER.erase()
@@ -161,12 +161,7 @@ while MAIN_LOOP:
                 TEXT_EXIT = FONT.render(TEXT_END, 1, (0, 0, 0))
                 WINDOW.blit(TEXT_VICTORY, (65, 225))
                 WINDOW.blit(TEXT_EXIT, (65, 430))
-                for event in pygame.event.get():
-                    if event.type == QUIT\
-                    or event.type == KEYDOWN and event.key == K_ESCAPE:
-                        CONTINUE_GAME = 0
-                        CONTINUE_HOME = 0
-                        MAIN_LOOP = 0
+
 
             else:
                 #If user didn't find the tube
@@ -256,11 +251,10 @@ while MAIN_LOOP:
                 WINDOW.blit(BACKGROUND, (0, 30))
                 WINDOW.blit(TEXT_DEFEAT, (10, 225))
                 WINDOW.blit(TEXT_EXIT, (65, 430))
-                for event in pygame.event.get():
-                    if event.type == QUIT\
-                    or event.type == KEYDOWN and event.key == K_ESCAPE:
-                        CONTINUE_GAME = 0
-                        CONTINUE_HOME = 0
-                        MAIN_LOOP = 0
+                
+            for event in pygame.event.get():
+                if event.type == QUIT\
+                or event.type == KEYDOWN and event.key == K_ESCAPE:
+                    MAIN_LOOP = 0
 
         pygame.display.flip()
