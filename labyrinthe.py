@@ -127,19 +127,16 @@ while MAIN_LOOP:
 
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == TUBE_LETTER:
             MACGYVER.erase()
-            MACGYVER.add_inventory()
             TUBE_CATCH = True
             WINDOW.blit(TUBE, (360, 0))
 
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == NEEDLE_LETTER:
             MACGYVER.erase()
-            MACGYVER.add_inventory()
             NEEDLE_CATCH = True
             WINDOW.blit(NEEDLE, (330, 0))
 
         if MAZE.structure_map[MACGYVER.case_y][MACGYVER.case_x] == ETHER_LETTER:
             MACGYVER.erase()
-            MACGYVER.add_inventory()
             ETHER_CATCH = True
             WINDOW.blit(ETHER, (300, 0))
 

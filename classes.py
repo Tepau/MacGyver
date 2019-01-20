@@ -60,7 +60,7 @@ class Maze:
         ether = pygame.image.load(ETHER_IMAGE).convert_alpha()
         wall = pygame.image.load(WALL_IMAGE).convert()
         arrival = pygame.image.load(ARRIVAL_IMAGE).convert_alpha()
-        
+
         num_ligne = 0
         for ligne in self.structure_map:
             num_case = 0
@@ -128,9 +128,6 @@ class Character:
     def erase(self):
         '''Erase image of the maze when MG passes over it'''
         self.maze.structure_map[self.case_y][self.case_x] = "0"
-
-    def add_inventory(self):
-        '''Add the object found in the inventory'''
         self.inventory += 1
 
     def display_inventory(self):
