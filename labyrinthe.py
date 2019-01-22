@@ -12,8 +12,15 @@ from pygame.locals import (QUIT, K_DOWN,
                            K_LEFT, K_UP,
                            K_RETURN, KEYDOWN)
 
-from classes import *
-from constantes import *
+from classes import (Maze, Character)
+from constantes import (SCREEN_HEIGHT, SCREEN_WIDTH,
+                        WINDOW_TITLE, ICON_IMAGE,
+                        NEEDLE_IMAGE, TUBE_IMAGE,
+                        NEEDLE_LETTER, TUBE_LETTER,
+                        ETHER_LETTER, TEXT_END,
+                        SYRINGE_IMAGE, BANDEAU_IMAGE,
+                        BACKGROUND_IMAGE, HOME_IMAGE,
+                        AVATAR_IMAGE, ETHER_IMAGE)
 
 pygame.init()
 
