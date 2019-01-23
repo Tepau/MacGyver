@@ -253,7 +253,10 @@ while MAIN_LOOP:
                                 1, (0, 0, 0))
 
                 WINDOW.blit(BACKGROUND, (0, 30))
-                WINDOW.blit(TEXT_DEFEAT, (10, 225))
+                textrect = TEXT_DEFEAT.get_rect()
+                textrect.centerx = SCREEN_WIDTH / 2
+                textrect.centery = SCREEN_HEIGHT / 2
+                WINDOW.blit(TEXT_DEFEAT, textrect)
                 WINDOW.blit(TEXT_EXIT, (65, 430))
 
             for event in pygame.event.get():
