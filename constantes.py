@@ -10,7 +10,7 @@ ICON_IMAGE = "Ressources/MacGyver.png"
 
 #Maze images
 HOME_IMAGE = "Ressources/accueil1.jpg"
-BACKGROUND_IMAGE = "Ressources/bleu.jpg"
+BACKGROUND_IMAGE = "Ressources/fond.jpg"
 ARRIVAL_IMAGE = "Ressources/Gardien.png"
 WALL_IMAGE = "Ressources/murs.png"
 AVATAR_IMAGE = "Ressources/MacGyver.png"

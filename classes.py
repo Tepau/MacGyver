@@ -126,7 +126,9 @@ class Character:
                     self.y_item = self.case_y * SPRITE_SIZE + BANNER_SIZE
 
     def erase(self):
-        '''Erase image of the maze when MG passes over it'''
+        '''Erase image of the maze when MG passes over it and
+        
+        increase inventory'''
         self.maze.structure_map[self.case_y][self.case_x] = "0"
         self.inventory += 1
 
