@@ -1,3 +1,6 @@
+#! /usr/bin/env python3
+# coding: utf-8
+
 '''Classes module'''
 import random
 import pygame
@@ -127,7 +130,7 @@ class Character:
 
     def erase(self):
         '''Erase image of the maze when MG passes over it and
-        
+
         increase inventory'''
         self.maze.structure_map[self.case_y][self.case_x] = "0"
         self.inventory += 1

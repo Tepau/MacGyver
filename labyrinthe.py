@@ -1,4 +1,6 @@
 # -*- coding: Utf-8 -*
+#! /usr/bin/env python3
+
 '''Maze game
 The goal is to get Mac Gyver out of the maze
 To win he must pick up 3 items that will allow him to create a syringe
