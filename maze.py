@@ -1,16 +1,17 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python
 # coding: utf-8
 
-'''Classes module'''
+'''Class for generate and display the maze'''
 import random
 import pygame
 
-from constantes import (NB_SPRITE_SIDE, SPRITE_SIZE,
+from constantes import (SPRITE_SIZE, ETHER_LETTER,
                         BANNER_SIZE, ARRIVAL_IMAGE,
                         WALL_IMAGE, ETHER_IMAGE,
                         NEEDLE_IMAGE, TUBE_IMAGE,
                         NEEDLE_LETTER, TUBE_LETTER,
-                        ETHER_LETTER)
+                        )
+
 
 class Maze:
     '''Define the maze strcture. Two methods
@@ -53,7 +54,6 @@ class Maze:
 
         return structure_maze
 
-
     def display(self, window):
         '''Display the maze structure
 
@@ -83,59 +83,3 @@ class Maze:
 
                 num_case += 1
             num_ligne += 1
-
-
-class Character:
-    '''Define movement of the character
-
-    and the inventory of obects picked up
-
-    '''
-
-    def __init__(self, avatar, maze):
-        self.avatar = avatar
-        self.x_item = 0
-        self.y_item = 30
-        self.case_x = 0
-        self.case_y = 0
-        self.maze = maze
-        self.inventory = 0
-
-    def move(self, direction):
-        '''verified that character can move on the desired case'''
-
-        if direction == "right":
-            if self.case_x < (NB_SPRITE_SIDE - 1):
-                if self.maze.structure_map[self.case_y][self.case_x + 1] != "m":
-                    self.case_x += 1
-                    self.x_item = self.case_x * SPRITE_SIZE
-
-        elif direction == "left":
-            if self.case_x > 0:
-                if self.maze.structure_map[self.case_y][self.case_x - 1] != "m":
-                    self.case_x -= 1
-                    self.x_item = self.case_x * SPRITE_SIZE
-
-        elif direction == "up":
-            if self.case_y > 0:
-                if self.maze.structure_map[self.case_y - 1][self.case_x] != "m":
-                    self.case_y -= 1
-                    self.y_item = self.case_y * SPRITE_SIZE + BANNER_SIZE
-
-        elif direction == "down":
-            if self.case_y < (NB_SPRITE_SIDE - 1):
-                if self.maze.structure_map[self.case_y + 1][self.case_x] != "m":
-                    self.case_y += 1
-                    self.y_item = self.case_y * SPRITE_SIZE + BANNER_SIZE
-
-    def erase(self):
-        '''Erase image of the maze when MG passes over it and
-
-        increase inventory'''
-        self.maze.structure_map[self.case_y][self.case_x] = "0"
-        self.inventory += 1
-
-    def display_inventory(self):
-        '''Display the number of object to find'''
-        text = "Remaining items to find: {}".format(3 - self.inventory)
-        return text
