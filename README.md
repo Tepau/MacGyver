@@ -30,7 +30,7 @@ refusée et le jeu est perdu.
 
 Python
 
-## Installation
+## Installation nécessaire
 
     python install.py
     
