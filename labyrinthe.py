@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#! C:\Users\Malaury\Code\MacGyver\env\Scripts\python.exe
 # -*- coding: Utf-8 -*
 
 '''Maze game
@@ -49,7 +49,7 @@ SYRINGE = pygame.image.load(SYRINGE_IMAGE).convert_alpha()
 BANDEAU = pygame.image.load(BANDEAU_IMAGE).convert()
 
 pygame.key.set_repeat(100, 30)
-MAIN_LOOP = True
+main_loop = True
 
 # Booleens used to define which object is caught or not
 TUBE_CATCH = False
@@ -57,7 +57,7 @@ ETHER_CATCH = False
 NEEDLE_CATCH = False
 
 # Main loop of the game
-while MAIN_LOOP:
+while main_loop:
 
     # Display home screen
     WINDOW.blit(HOME, (0, 30))
@@ -70,11 +70,11 @@ while MAIN_LOOP:
     # Refresh the screen
     pygame.display.flip()
 
-    CONTINUE_HOME = True
-    CONTINUE_GAME = True
+    continue_home = True
+    continue_game = True
 
     # Home loop
-    while CONTINUE_HOME:
+    while continue_home:
 
         # Speeed limitation for the loop
         pygame.time.Clock().tick(30)
@@ -83,13 +83,13 @@ while MAIN_LOOP:
         for event in pygame.event.get():
             if event.type == QUIT \
                     or event.type == KEYDOWN and event.key == K_ESCAPE:
-                MAIN_LOOP = False
-                CONTINUE_HOME = False
-                CONTINUE_GAME = False
+                main_loop = False
+                continue_home = False
+                continue_game = False
 
             # If user presses "Enter", the maze starts
             elif event.type == KEYDOWN and event.key == K_RETURN:
-                CONTINUE_HOME = False
+                continue_home = False
 
         pygame.display.flip()
 
@@ -98,7 +98,7 @@ while MAIN_LOOP:
     MG = Character(AVATAR, MAZE)
 
     # Game loop
-    while CONTINUE_GAME:
+    while continue_game:
 
         pygame.time.Clock().tick(30)
         # Loading background and a text zone for inventory
@@ -119,9 +119,9 @@ while MAIN_LOOP:
         for event in pygame.event.get():
             if event.type == QUIT \
                     or event.type == KEYDOWN and event.key == K_ESCAPE:
-                CONTINUE_GAME = False
-                CONTINUE_HOME = False
-                MAIN_LOOP = False
+                continue_game = False
+                continue_home = False
+                main_loop = False
 
             # Directional keys are used to move Mac Gyver
             if event.type == KEYDOWN:
@@ -267,6 +267,6 @@ while MAIN_LOOP:
             for event in pygame.event.get():
                 if event.type == QUIT or \
                         event.type == KEYDOWN and event.key == K_ESCAPE:
-                    MAIN_LOOP = False
+                    main_loop = False
 
         pygame.display.flip()
