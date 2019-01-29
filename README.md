@@ -1,4 +1,4 @@
-Labyrinthe Mac Gyver
+							Labyrinthe Mac Gyver
 
 Mac Gyver est enfermé dans un labyrinthe. Pour s'échapper il doit ramasser 3 objets qui lui permettront de confectionner une seringue afin d'endormir le garde qui protège la sortie.
 
@@ -19,14 +19,15 @@ refusée et le jeu est perdu.
 Le jeu est développé en python 3.7.1
 
 Commencer par installer python :
-https://www.python.org/downloads/release/python-371/
+		https://www.python.org/downloads/release/python-371/
 
 Récupérer les codes du jeu :
 
-git clone https://github.com/Tepau/MacGyver.git
+		git clone https://github.com/Tepau/MacGyver.git
 
 Puis dans l'invite de commande écrire les instructions suivantes :
 
-python install.py
-et 
-python labyrinthe.py
+		python install.py
+et 	
+
+		python labyrinthe.py
