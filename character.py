@@ -1,5 +1,4 @@
 # coding: utf-8
-
 '''Class for create a character'''
 from constantes import (NB_SPRITE_SIDE, SPRITE_SIZE,
                         BANNER_SIZE)
