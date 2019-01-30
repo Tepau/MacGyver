@@ -37,6 +37,7 @@ Pygame
 maze.py ==> Fichier de classe
 character.py ==> Fichier de classe
 constantes.py ==> Fichier contenant ls constantes
+n1 ==> Structure du labyrinthe
 labyrinthe.py ==> Fichier du jeu, à lancer pour jouer
 
 ## Récupération des codes du jeu 
