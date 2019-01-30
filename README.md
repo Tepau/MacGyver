@@ -24,8 +24,6 @@ Si Mac Gyver ramasse les 3 objets et se présente devant le garde l’utilisateu
 Si il n'a pas ramassé les 3 objets et qu'il se présente devant le garde, la sortie lui est 
 refusée et le jeu est perdu.
 
-
-
 ## Language utilisé 
 
 Python
@@ -33,6 +31,13 @@ Python
 ## Construit avec
 
 Pygame 
+
+## Descriptioon des fichiers
+
+maze.py ==> Fichier de classe
+character.py ==> Fichier de classe
+constantes.py ==> Fichier contenant ls constantes
+labyrinthe.py ==> Fichier du jeu, à lancer pour jouer
 
 ## Récupération des codes du jeu 
 
