@@ -30,7 +30,16 @@ refusée et le jeu est perdu.
 
 Python
 
+## Construit avec
+
+Pygame 
+
+## Récupération des codes du jeu 
+
+    git clone https://github.com/Tepau/MacGyver
+
 ## Installation nécessaire
+Se placer dans le répertoire du projet et lancer les commmandes suivantes
 
     python install.py
     
